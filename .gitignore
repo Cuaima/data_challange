@@ -1,0 +1,78 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Poetry specific
+.poetry/
+*.lock
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Jupyter runtime files
+*.nbconvert.ipynb
+.jupyter/
+
+# Virtual environment
+.env/
+.venv/
+env/
+venv/
+
+
+# Docker specific
+*.tar
+*.img
+*.pid
+*.log
+docker-compose.override.yml
+.dockerignore
+
+# SQL data files
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# Data files
+data/
+!data/README.md # Keep README in data directory
+
+# Logs
+logs/
+*.log
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Pytest
+.cache/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.bak
+*.tmp
+
+# OS generated files
+.DS_Store
+Thumbs.db

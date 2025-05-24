@@ -1,0 +1,1 @@
+- model, queries (controller), app (view)

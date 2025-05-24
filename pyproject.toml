@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "data-challenge"
+version = "0.1.0"
+description = "A data challenge project exploring the path from ad impression to purchase using SQL, visualization, and predictive modeling."
+authors = ["Cuaima <cl@udia.me>"]
+license = "\"MIT\""
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+notebook = "^7.4.2"
+jupyterlab = "^4.4.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
