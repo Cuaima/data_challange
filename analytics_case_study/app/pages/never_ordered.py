@@ -1,9 +1,23 @@
 from utils.db import run_query
 import streamlit as st
 
+def obfuscate_email(email):
+    name, domain = email.split('@')
+    if len(name) <= 2:
+        name_obf = name[0] + '*' * (len(name) - 1)
+    else:
+        name_obf = name[0] + '*' * (len(name) - 2) + name[-1]
+    return f"{name_obf}@{domain}"
+
 def render():
     # Query for users registered in the last 6 months but never ordered
     df_never_ordered = run_query("query_1_2.sql")
+
+    # Obfuscate email addresses
+    df_never_ordered['email'] = df_never_ordered['email'].apply(obfuscate_email)
+
+    # hide user IDs
+    df_display = df_never_ordered.drop(columns=["user_id"])
 
     st.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
 
@@ -30,4 +44,6 @@ def render():
     with col2:
         # Data preview
         st.subheader("User List:")
-        st.dataframe(df_never_ordered)
+        st.dataframe(df_display)
+
+render()

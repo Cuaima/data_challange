@@ -22,3 +22,7 @@ def render():
     )
 
     st.altair_chart(chart, use_container_width=True)
+
+
+
+render()

@@ -9,4 +9,6 @@ def render():
     st.subheader("Average Days to First Order")
     st.metric(label="Average Days to First Order", value = avg_days)
 
+render()
+
     

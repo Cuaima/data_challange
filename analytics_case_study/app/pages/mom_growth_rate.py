@@ -28,3 +28,5 @@ def render():
 
     st.subheader("Month-over-Month Growth Rate")
     st.altair_chart(chart, use_container_width=True)
+
+render()

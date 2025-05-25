@@ -22,3 +22,5 @@ def render():
             <h1 style="color:#1f77b4;">{ctr_value:.2f}%</h1>
         </div>
         """, unsafe_allow_html=True)
+
+render()
