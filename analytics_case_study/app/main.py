@@ -1,7 +1,10 @@
+import os
 import streamlit as st
 import sqlite3
 import pandas as pd
 import altair as alt
+from utils.db import run_query
+from pages import top_products
 
 # Set the page configuration
 st.set_page_config(
@@ -24,6 +27,7 @@ with st.sidebar:
     st.header("Navigation")
     st.selectbox("Select a section:", ["Overview", "Product Performance", "User Behavior", "Sales Trends"])
 
+
 # Configure the main content area
 with st.container():
     configure_overview()
@@ -33,35 +37,19 @@ with st.expander("Queries Overview"):
     left.subheader("Top 10 Most Frequently Purchased Products")
     right.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
 
-# Establish a connection to the SQLite database
-conn = sqlite3.connect("/Users/claudiagroot/Documents/Code/data_challange/analytics_case_study/data/website_data.db")
-queries_path = "/Users/claudiagroot/Documents/Code/data_challange/analytics_case_study/queries/"
 
-def load_query(query):
-    """read sql query."""
-    with open(query, 'r') as file:
-        return file.read()
-
-# Load Queries
-top_products = load_query(queries_path + "query_1_1.sql")
-never_ordered = load_query(queries_path + "query_1_2.sql")
-avg_page_views_per_device = load_query(queries_path + "query_1_3.sql")
-ctr = load_query(queries_path + "query_1_4.sql")
-mom_growth_rate = load_query(queries_path + "query_1_5.sql")
-avg_days_to_first_order = load_query(queries_path + "query_1_6.sql")
-most_viewed_category = load_query(queries_path + "query_1_7.sql")
 
 # Run query and get dataframes
-df_top_products = pd.read_sql_query(top_products, conn)
-df_never_ordered = pd.read_sql_query(never_ordered, conn)
-df_avg_page_views_per_device = pd.read_sql_query(avg_page_views_per_device, conn)
-df_ctr = pd.read_sql_query(ctr, conn)
-df_mom_growth_rate = pd.read_sql_query(mom_growth_rate, conn)
-df_avg_days_to_first_order = pd.read_sql_query(avg_days_to_first_order, conn)
-# df_most_viewed_category = pd.read_sql_query(most_viewed_category, conn)
 
-st.subheader("Top 10 Most Frequently Purchased Products")
-st.dataframe(df_top_products)
+df_never_ordered = run_query("query_1_2.sql")
+df_avg_page_views_per_device = run_query("query_1_3.sql")
+df_ctr = run_query("query_1_4.sql")
+df_mom_growth_rate = run_query("query_1_5.sql")
+df_avg_days_to_first_order = run_query("query_1_6.sql")
+# df_most_viewed_category = run_query("query_1_7.sql")
+
+
+top_products.render() 
 
 st.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
 st.dataframe(df_never_ordered)
