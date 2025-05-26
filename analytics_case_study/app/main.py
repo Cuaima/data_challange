@@ -36,7 +36,7 @@ with st.container():
 #     right.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
 
 with st.expander("Top 10 Most Frequently Purchased Products"):
-    st.write("This section displays the top 10 products based on the total quantity sold.")
+    # st.write("This section displays the top 10 products based on the total quantity sold.")
     top_products.render()
 
 with st.expander("Users Registered in the Last 6 Months but Never Placed an Order"):
@@ -59,8 +59,6 @@ with st.expander("Average Days to First Order"):
     st.write("This section shows the average number of days it takes for a user to place their first order after registration.")
     avg_days_to_first_order.render()
     
-# st.subheader("Most Viewed Category")
-# st.dataframe(df_most_viewed_category)
 
 section2.render()
 

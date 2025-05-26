@@ -22,3 +22,9 @@ cd data_challenge
 ```
 streamlit run analytics_case_study/app/main.py
 ```
+
+## Known Bug:
+
+Once the app starts, it sometimes loads in a different page than the main one.
+
+Temporary solution: Click on the `main` button on the sidebar to view the full application.

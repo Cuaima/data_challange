@@ -19,7 +19,6 @@ def render():
     # hide user IDs
     df_display = df_never_ordered.drop(columns=["user_id"])
 
-    st.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
 
     # KPI: number of users found
     col1, col2 = st.columns([2,2])
@@ -35,7 +34,8 @@ def render():
         
         # Downloadable CSV
         st.download_button(
-            label="Download User List as CSV",
+            label="Download User List as CSV (Warning: Contains Sensitive Data)",
+            help="This file contains sensitive user data. Please handle it with care.",
             data=df_never_ordered.to_csv(index=False),
             file_name="never_ordered_users.csv",
             mime="text/csv"
@@ -43,7 +43,12 @@ def render():
     
     with col2:
         # Data preview
-        st.subheader("User List:")
+        st.markdown("### User List:")
         st.dataframe(df_display)
+
+    st.markdown("""
+        - This section displays users who registered in the last 6 months but have never placed an order.
+        - These users may require targeted marketing efforts to encourage them to make their first purchase.
+                """)
 
 render()
