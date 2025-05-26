@@ -1,7 +1,6 @@
 import streamlit as st
-import sqlite3
-import pandas as pd
-import altair as alt
+from pages import section2, section3, top_products, avg_days_to_first_order,ctr, mom_growth_rate, avg_views_per_device, never_ordered
+
 
 # Set the page configuration
 st.set_page_config(
@@ -19,64 +18,50 @@ def configure_overview():
         Use the navigation on the left to explore different sections.
     """)
 
-# Configure the sidebar navigation
-with st.sidebar:
-    st.header("Navigation")
-    st.selectbox("Select a section:", ["Overview", "Product Performance", "User Behavior", "Sales Trends"])
-
 # Configure the main content area
 with st.container():
     configure_overview()
 
-with st.expander("Queries Overview"):
-    left, right = st.columns(2)
-    left.subheader("Top 10 Most Frequently Purchased Products")
-    right.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
+with st.container():
+    st.header("Section 1: SQL & Data Retrieval")
+    st.write("""
+        In this section, we will retrieve data from the database using SQL queries.
+        The data will be used to generate various visualizations and insights.
+    """)
+    st.markdown("""
+        **Note:** The SQL queries are not shown here, but they are executed in the background to fetch the required data.
+    """)
+#     left, right = st.columns(2)
+#     left.subheader("Top 10 Most Frequently Purchased Products")
+#     right.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
 
-# Establish a connection to the SQLite database
-conn = sqlite3.connect("/Users/claudiagroot/Documents/Code/data_challange/analytics_case_study/data/website_data.db")
-queries_path = "/Users/claudiagroot/Documents/Code/data_challange/analytics_case_study/queries/"
+with st.expander("Top 10 Most Frequently Purchased Products"):
+    st.write("This section displays the top 10 products based on the total quantity sold.")
+    top_products.render()
 
-def load_query(query):
-    """read sql query."""
-    with open(query, 'r') as file:
-        return file.read()
+with st.expander("Users Registered in the Last 6 Months but Never Placed an Order"):
+    st.write("This section shows users who registered in the last 6 months but have never placed an order.")
+    never_ordered.render()  
 
-# Load Queries
-top_products = load_query(queries_path + "query_1_1.sql")
-never_ordered = load_query(queries_path + "query_1_2.sql")
-avg_page_views_per_device = load_query(queries_path + "query_1_3.sql")
-ctr = load_query(queries_path + "query_1_4.sql")
-mom_growth_rate = load_query(queries_path + "query_1_5.sql")
-avg_days_to_first_order = load_query(queries_path + "query_1_6.sql")
-most_viewed_category = load_query(queries_path + "query_1_7.sql")
+with st.expander("Average Views per Device"):
+    st.write("This section displays the average number of views per device type.")
+    avg_views_per_device.render()
 
-# Run query and get dataframes
-df_top_products = pd.read_sql_query(top_products, conn)
-df_never_ordered = pd.read_sql_query(never_ordered, conn)
-df_avg_page_views_per_device = pd.read_sql_query(avg_page_views_per_device, conn)
-df_ctr = pd.read_sql_query(ctr, conn)
-df_mom_growth_rate = pd.read_sql_query(mom_growth_rate, conn)
-df_avg_days_to_first_order = pd.read_sql_query(avg_days_to_first_order, conn)
-# df_most_viewed_category = pd.read_sql_query(most_viewed_category, conn)
+with st.expander("Click-Through Rate (CTR)"):
+    st.write("This section shows the click-through rate (CTR) for the website.")
+    ctr.render()
 
-st.subheader("Top 10 Most Frequently Purchased Products")
-st.dataframe(df_top_products)
+with st.expander("Month-over-Month Growth Rate"):
+    st.write("This section displays the month-over-month growth rate of the website.")
+    mom_growth_rate.render()
 
-st.subheader("Users Registered in the Last 6 Months but Never Placed an Order")
-st.dataframe(df_never_ordered)
-
-st.subheader("Average Page Views per Device")
-st.dataframe(df_avg_page_views_per_device)
-
-st.subheader("Click-Through Rate (CTR) by Device")
-st.dataframe(df_ctr)
-
-st.subheader("Month-over-Month Growth Rate")
-st.dataframe(df_mom_growth_rate)
-
-st.subheader("Average Days to First Order")
-st.dataframe(df_avg_days_to_first_order)
-
+with st.expander("Average Days to First Order"):
+    st.write("This section shows the average number of days it takes for a user to place their first order after registration.")
+    avg_days_to_first_order.render()
+    
 # st.subheader("Most Viewed Category")
 # st.dataframe(df_most_viewed_category)
+
+section2.render()
+
+section3.render()
