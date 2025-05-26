@@ -120,31 +120,4 @@ def process_features(): # FIXME: this function does too much, consider breaking 
 
 features = process_features()
 
-def render():
 
-    # Display feature data for exploratory analysis
-    st.subheader("Feature Data Preview")
-    st.dataframe(features.head())
-
-    # Plot distribution with Plotly
-    st.subheader("Total Order Amount Distribution")
-    fig = px.histogram(
-        features,
-        x='total_amount',
-        nbins=30,
-        title="Distribution of Transformed Total Order Amount",
-        labels={'total_amount': 'Total Order Amount (scaled)'},
-        color_discrete_sequence=['skyblue']
-    )
-    fig.update_traces(opacity=0.7)
-    st.plotly_chart(fig, use_container_width=True)
-
-    # # Correlation Heatmap
-    # st.subheader("Feature Correlation Heatmap")
-    # fig, ax = plt.subplots()
-    # sns.heatmap(features.corr(numeric_only=True), annot=True, fmt=".2f", cmap="coolwarm", ax=ax)
-    # st.pyplot(fig)
-
-
-
-render()

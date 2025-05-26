@@ -51,4 +51,4 @@ def render():
         - These users may require targeted marketing efforts to encourage them to make their first purchase.
                 """)
 
-
+render()
