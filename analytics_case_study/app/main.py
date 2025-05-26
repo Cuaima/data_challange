@@ -1,5 +1,5 @@
 import streamlit as st
-from pages import section2, top_products, avg_days_to_first_order,ctr, mom_growth_rate, avg_views_per_device, never_ordered
+from pages import section2, section3, top_products, avg_days_to_first_order,ctr, mom_growth_rate, avg_views_per_device, never_ordered
 
 
 # Set the page configuration
@@ -63,3 +63,5 @@ with st.expander("Average Days to First Order"):
 # st.dataframe(df_most_viewed_category)
 
 section2.render()
+
+section3.render()
