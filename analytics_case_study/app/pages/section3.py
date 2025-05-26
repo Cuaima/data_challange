@@ -1,4 +1,5 @@
 import streamlit as st
+from pages import section3_processing, section3_exploration
 
 def render():
     with st.container():
@@ -92,5 +93,9 @@ def render():
                     - Predicting order values can help in managing inventory levels more effectively, ensuring that popular products are always in stock.
                     - Insights from the model can guide improvements in the user experience, such as optimizing the checkout process or personalizing product recommendations.
         """)
+
+    section3_processing.render()
+
+    section3_exploration.render()
 
 render()

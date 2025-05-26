@@ -1,6 +1,6 @@
 import streamlit as st
 from pages import section1, section2, section3
-from pages import section3_practical
+from analytics_case_study.app.pages import section3_processing, section3_exploration
 
 # Set the page configuration
 st.set_page_config(
@@ -28,5 +28,3 @@ section1.render()
 section2.render()
 
 section3.render()
-
-section3_practical.render()

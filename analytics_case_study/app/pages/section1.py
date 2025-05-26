@@ -38,5 +38,3 @@ def render():
     with st.expander("Average Days to First Order"):
         st.write("This section shows the average number of days it takes for a user to place their first order after registration.")
         avg_days_to_first_order.render()
-
-render()
